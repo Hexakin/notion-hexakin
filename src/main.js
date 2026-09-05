@@ -8,6 +8,7 @@ const panel = document.getElementById('panel');
 const dropzone = document.getElementById('dropzone');
 const fileInput = document.getElementById('file-input');
 const dropHint = document.getElementById('drop-actions');
+const facts = document.getElementById('facts');
 const processingEl = document.getElementById('processing');
 const processingStatus = document.getElementById('processing-status');
 const progressBar = document.getElementById('progress-bar');
@@ -37,6 +38,7 @@ function render(s) {
   panel.hidden = s.phase === 'landing';
   dropzone.hidden = s.phase !== 'tool';
   dropHint.hidden = s.phase !== 'tool';
+  facts.hidden = s.phase !== 'tool';
   processingEl.hidden = s.phase !== 'processing';
   resultEl.hidden = s.phase !== 'result';
   errorEl.hidden = s.phase !== 'error';

@@ -15,6 +15,7 @@
   <body>
     <header class="mast">
       <a class="wordmark" href="#top" data-action="goto-landing">Hexakin</a>
+      <p class="product mute">Notion Export Cleaner</p>
     </header>
 
     <main id="top">
@@ -53,7 +54,7 @@
           <input id="file-input" type="file" accept=".zip,application/zip" hidden />
         </div>
 
-        <ul class="facts">
+        <ul id="facts" class="facts">
           <li>Nested ZIP unwrap is automatic.</li>
           <li>The ZIP never leaves this browser.</li>
         </ul>
@@ -99,7 +100,7 @@
                   stroke-linejoin="round"
                 />
               </svg>
-              Download
+              Download cleaned .zip
             </button>
             <button type="button" class="btn btn-ghost" data-action="clean-another">
               Clean another
@@ -151,7 +152,7 @@
         <p>No. Email is optional and only appears after a successful clean.</p>
         <h3>Who made this?</h3>
         <p>
-          Hexakin, a Hillmade product. Not affiliated with Notion. Contact
+          Hexakin. Not affiliated with Notion. Contact
           <a href="mailto:jonathan.hill@hillmade.uk">jonathan.hill@hillmade.uk</a>.
         </p>
 
