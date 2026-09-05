@@ -131,14 +131,8 @@ main {
 }
 
 .lede {
-  margin: 0 0 0.75rem;
-  color: var(--bone-2);
-}
-
-.will-live {
   margin: 0 0 1.75rem;
-  color: var(--mute);
-  font-size: 0.95rem;
+  color: var(--bone-2);
 }
 
 .cta-row {
