@@ -114,21 +114,25 @@
           <button type="button" class="btn btn-ghost" data-action="clean-another">Try again</button>
         </div>
 
-        <div id="waitlist" class="waitlist" hidden>
-          <h2>Hexakin news</h2>
-          <p class="mute">Optional. Stored in this browser only. Never sent.</p>
-          <form id="waitlist-form">
-            <label for="waitlist-email">Email</label>
+        <div id="newsletter" class="newsletter" hidden>
+          <h2>Hexakin newsletter</h2>
+          <p class="mute">Optional. Hear when the next Hexakin tool ships.</p>
+          <form>
+            <label for="newsletter-email">Email</label>
             <input
-              id="waitlist-email"
+              id="newsletter-email"
               name="email"
               type="email"
               autocomplete="email"
+              required
               placeholder="you@example.com"
             />
-            <button type="submit" class="btn btn-copper">Notify me</button>
+            <button type="submit" class="btn btn-copper">Subscribe</button>
           </form>
-          <p id="waitlist-done">Saved in this browser.</p>
+          <p data-newsletter="sent" role="status" hidden>Subscribed. Thanks.</p>
+          <p data-newsletter="error" role="alert" hidden>
+            Couldn't send. Try again, or <a>email us directly</a>.
+          </p>
         </div>
       </section>
 
@@ -149,7 +153,10 @@
         <h3>What if two pages clean to the same name?</h3>
         <p>The second file gets a <span class="mono">(2)</span> suffix so nothing is overwritten.</p>
         <h3>Do I need an email to download?</h3>
-        <p>No. Email is optional and only appears after a successful clean.</p>
+        <p>
+          No. The download is free. The newsletter signup is optional and only appears after a
+          successful clean.
+        </p>
         <h3>Who made this?</h3>
         <p>
           Hexakin. Not affiliated with Notion. Contact
@@ -158,8 +165,9 @@
 
         <h2>Privacy</h2>
         <p>
-          No accounts. No server-side waitlist. If you leave an email, it is stored in this browser
-          under <span class="mono">hexakin-notion-waitlist</span> and is never sent.
+          No accounts. The export never leaves this browser. If you subscribe, your email address is
+          sent to FormSubmit (formsubmit.co), which forwards it to the Hexakin inbox. This page does
+          not store the submission.
         </p>
       </section>
     </main>

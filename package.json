@@ -9,7 +9,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test src/clean/filenames.test.js",
+    "test": "node --test src/clean/filenames.test.js src/forms.test.js",
     "sample": "node scripts/make-sample-zip.mjs"
   },
   "dependencies": {
