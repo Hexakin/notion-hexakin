@@ -13,15 +13,11 @@ export function mountNewsletter(root) {
   const sentEl = root.querySelector('[data-newsletter="sent"]');
   const errorEl = root.querySelector('[data-newsletter="error"]');
 
-  /** @type {import('./forms.js').FormState} */
   let state = 'idle';
 
   errorEl.querySelector('a').href =
     `mailto:${FORM_INBOX}?subject=${encodeURIComponent(SUBJECT)}`;
 
-  /**
-   * @param {import('./forms.js').FormEvent} event
-   */
   function dispatch(event) {
     const next = formStep(state, event);
     if (next === state) return;

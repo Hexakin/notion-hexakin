@@ -1,10 +1,10 @@
+// First submission to a new address needs a confirmation click.
 export const FORM_INBOX = 'hillymakes@gmail.com';
 export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${FORM_INBOX}`;
 
 /** @typedef {'idle' | 'sending' | 'sent' | 'error'} FormState */
 /** @typedef {'submit' | 'ok' | 'fail'} FormEvent */
 
-/** @type {Readonly<Record<FormState, Readonly<Partial<Record<FormEvent, FormState>>>>>} */
 const TRANSITIONS = Object.freeze({
   idle: Object.freeze({ submit: 'sending' }),
   sending: Object.freeze({ ok: 'sent', fail: 'error' }),
@@ -21,7 +21,6 @@ export function formStep(state, event) {
   return TRANSITIONS[state][event] ?? state;
 }
 
-// First submission to a new address needs a confirmation click.
 /**
  * @param {Record<string, string>} fields
  * @returns {Promise<void>}

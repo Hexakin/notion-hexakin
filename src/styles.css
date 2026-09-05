@@ -395,11 +395,6 @@ main {
   color: var(--danger);
 }
 
-.btn:disabled {
-  opacity: 0.6;
-  cursor: default;
-}
-
 .faq {
   margin-top: 4rem;
   padding-top: 2rem;
