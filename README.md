@@ -2,7 +2,7 @@
 
 Strip Notion 32-character IDs from export filenames in your browser. Hexakin product. Hillmade parent. Not affiliated with Notion.
 
-The ZIP stays in this browser. Nothing is uploaded.
+The ZIP stays in this browser. If you subscribe to the newsletter, the email address is sent through FormSubmit.
 
 ## Run locally
 

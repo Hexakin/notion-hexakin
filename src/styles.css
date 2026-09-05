@@ -171,6 +171,11 @@ main {
   filter: brightness(1.06);
 }
 
+.btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 .btn-ghost {
   background: transparent;
   color: var(--bone);
@@ -351,31 +356,31 @@ main {
   color: var(--danger);
 }
 
-.waitlist {
+.newsletter {
   padding: 1rem 0 0;
   border-top: 1px solid var(--ink);
 }
 
-.waitlist h2 {
+.newsletter h2 {
   margin: 0 0 0.35rem;
   font-size: 1.05rem;
   font-weight: 500;
 }
 
-.waitlist form {
+.newsletter form {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 0.75rem;
 }
 
-.waitlist label {
+.newsletter label {
   width: 100%;
   color: var(--mute);
   font-size: 0.85rem;
 }
 
-.waitlist input {
+.newsletter input {
   flex: 1 1 12rem;
   min-height: 2.75rem;
   padding: 0.5rem 0.75rem;
@@ -384,6 +389,15 @@ main {
   background: var(--void-2);
   color: var(--bone);
   font: inherit;
+}
+
+[data-newsletter='error'] {
+  color: var(--danger);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 
 .faq {

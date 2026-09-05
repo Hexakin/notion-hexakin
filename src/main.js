@@ -1,5 +1,5 @@
 import './styles.css';
-import { hasWaitlistEntry, saveWaitlistEmail } from './waitlist.js';
+import { mountNewsletter } from './newsletter.js';
 
 const MAX_ZIP_SIZE = 200 * 1024 * 1024;
 
@@ -19,13 +19,9 @@ const resultDuplicates = document.getElementById('result-duplicates');
 const renamePreview = document.getElementById('rename-preview');
 const errorEl = document.getElementById('error');
 const errorMessage = document.getElementById('error-message');
-const waitlistEl = document.getElementById('waitlist');
-const waitlistForm = document.getElementById('waitlist-form');
-const waitlistEmail = document.getElementById('waitlist-email');
-const waitlistDone = document.getElementById('waitlist-done');
+const newsletterEl = document.getElementById('newsletter');
 
 let state = { phase: 'landing' };
-let successThisSession = false;
 let worker = null;
 
 function setState(next) {
@@ -42,11 +38,7 @@ function render(s) {
   processingEl.hidden = s.phase !== 'processing';
   resultEl.hidden = s.phase !== 'result';
   errorEl.hidden = s.phase !== 'error';
-  waitlistEl.hidden = !(successThisSession && s.phase === 'result');
-
-  const signedUp = hasWaitlistEntry();
-  waitlistForm.hidden = signedUp;
-  waitlistDone.hidden = !signedUp;
+  newsletterEl.hidden = s.phase !== 'result';
 
   if (s.phase === 'processing') {
     processingStatus.textContent = s.status;
@@ -155,7 +147,6 @@ async function processZip(file) {
         nestedZipName: raw.nestedZipName,
         sampleRenames: raw.sampleRenames,
       };
-      successThisSession = true;
       terminateWorker();
       setState({ phase: 'result', result: { blob, stats } });
     } else if (type === 'error') {
@@ -259,18 +250,5 @@ fileInput.addEventListener('change', () => {
   acceptZip(fileInput.files[0]);
 });
 
-waitlistForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  if (!successThisSession) return;
-  const email = waitlistEmail.value.trim();
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    waitlistEmail.setCustomValidity('Enter an email address.');
-    waitlistEmail.reportValidity();
-    return;
-  }
-  waitlistEmail.setCustomValidity('');
-  saveWaitlistEmail(email);
-  render(state);
-});
-
+mountNewsletter(newsletterEl);
 render(state);
