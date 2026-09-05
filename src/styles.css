@@ -85,6 +85,12 @@ a:hover {
   text-decoration: none;
 }
 
+.product {
+  margin: 0.2rem 0 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
 main {
   width: min(40rem, calc(100% - 2rem));
   margin: 0 auto;
