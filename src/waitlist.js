@@ -1,5 +1,3 @@
-/** @typedef {{ email: string, at: number }} WaitlistEntry */
-
 export const WAITLIST_KEY = 'hexakin-notion-waitlist';
 
 export function readWaitlist() {
@@ -11,7 +9,7 @@ export function readWaitlist() {
       return parsed.filter((row) => row && typeof row.email === 'string');
     }
     if (parsed && typeof parsed.email === 'string') {
-      return /** @type {WaitlistEntry[]} */ ([parsed]);
+      return [parsed];
     }
     return [];
   } catch {

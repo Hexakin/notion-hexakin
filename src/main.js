@@ -1,27 +1,6 @@
 import './styles.css';
 import { hasWaitlistEntry, saveWaitlistEmail } from './waitlist.js';
 
-/** @typedef {'landing' | 'tool' | 'processing' | 'result' | 'error'} AppPhase */
-
-/** @typedef {{
- *   totalFiles: number,
- *   fileRenamesCount: number,
- *   linksUpdatedCount: number,
- *   duplicates: string[],
- *   skippedLargeFiles: number,
- *   nestedZipName: string | null,
- *   sampleRenames: { oldName: string, newName: string }[]
- * }} CleanStats */
-
-/** @typedef {{ blob: Blob, stats: CleanStats }} CleanResult */
-
-/** @typedef {{ phase: 'landing' }
- *   | { phase: 'tool' }
- *   | { phase: 'processing', status: string, percent: number }
- *   | { phase: 'result', result: CleanResult }
- *   | { phase: 'error', message: string }
- * } AppState */
-
 const MAX_ZIP_SIZE = 200 * 1024 * 1024;
 
 const landing = document.getElementById('landing');
@@ -44,10 +23,8 @@ const waitlistForm = document.getElementById('waitlist-form');
 const waitlistEmail = document.getElementById('waitlist-email');
 const waitlistDone = document.getElementById('waitlist-done');
 
-/** @type {AppState} */
 let state = { phase: 'landing' };
 let successThisSession = false;
-/** @type {Worker | null} */
 let worker = null;
 
 function setState(next) {
@@ -140,9 +117,6 @@ function patchProcessing(partial) {
   setState({ ...state, ...partial });
 }
 
-/**
- * @param {File} file
- */
 async function processZip(file) {
   if (file.size > MAX_ZIP_SIZE) {
     setState({
@@ -170,7 +144,6 @@ async function processZip(file) {
     } else if (type === 'complete') {
       const raw = e.data.result;
       const blob = new Blob([raw.cleanZipBuffer], { type: 'application/zip' });
-      /** @type {CleanStats} */
       const stats = {
         totalFiles: raw.totalFiles,
         fileRenamesCount: raw.fileRenamesCount,
