@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Strip Notion 32-character IDs from export filenames in your browser. The ZIP never leaves this device."
+    />
+    <title>Notion Export Cleaner · Hexakin</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="mast">
+      <a class="wordmark" href="#top" data-action="goto-landing">Hexakin</a>
+    </header>
+
+    <main id="top">
+      <section id="landing" class="hero">
+        <p class="kicker mono">.zip · .csv · browser-only</p>
+        <h1>Notion exports hide the title behind a 32-character ID.</h1>
+        <p class="lede">
+          This page strips the IDs, rewrites markdown and HTML links, and leaves the original ZIP
+          untouched.
+        </p>
+        <div class="cta-row">
+          <button type="button" class="btn btn-copper" data-action="goto-tool">Clean export</button>
+          <button type="button" class="btn btn-ghost" data-action="try-sample">Try sample</button>
+        </div>
+      </section>
+
+      <section id="panel" class="panel" hidden>
+        <div
+          id="dropzone"
+          class="dropzone"
+          tabindex="0"
+          role="button"
+          aria-label="Drop a Notion export ZIP or choose a file"
+        >
+          <svg class="drop-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M12 16V4m0 0 4 4m-4-4-4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <p>Drop a Notion export ZIP</p>
+          <p class="mute">or click to choose a file</p>
+          <input id="file-input" type="file" accept=".zip,application/zip" hidden />
+        </div>
+
+        <ul class="facts">
+          <li>Nested ZIP unwrap is automatic.</li>
+          <li>The ZIP never leaves this browser.</li>
+        </ul>
+
+        <div id="drop-actions">
+          <button type="button" class="btn btn-ghost" data-action="try-sample">Try sample</button>
+        </div>
+
+        <div id="processing" hidden>
+          <p id="processing-status"></p>
+          <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+        </div>
+
+        <div id="result" hidden>
+          <div class="result-head">
+            <span class="check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6 9 17l-5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <p>Clean export ready.</p>
+          </div>
+          <dl id="result-counts" class="counts mono"></dl>
+          <p id="result-nested" class="mono"></p>
+          <ul id="result-duplicates" class="mono"></ul>
+          <div id="rename-preview" class="rename-preview mono"></div>
+          <div class="cta-row">
+            <button type="button" class="btn btn-copper" data-action="download">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 4v12m0 0 4-4m-4 4-4-4M4 18v1a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Download
+            </button>
+            <button type="button" class="btn btn-ghost" data-action="clean-another">
+              Clean another
+            </button>
+          </div>
+          <p class="untouched">Original untouched.</p>
+        </div>
+
+        <div id="error" class="error-box" hidden>
+          <p id="error-message"></p>
+          <button type="button" class="btn btn-ghost" data-action="clean-another">Try again</button>
+        </div>
+
+        <div id="waitlist" class="waitlist" hidden>
+          <h2>Hexakin news</h2>
+          <p class="mute">Optional. Stored in this browser only. Never sent.</p>
+          <form id="waitlist-form">
+            <label for="waitlist-email">Email</label>
+            <input
+              id="waitlist-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+            />
+            <button type="submit" class="btn btn-copper">Notify me</button>
+          </form>
+          <p id="waitlist-done">Saved in this browser.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="faq">
+        <h2>FAQ</h2>
+        <h3>What does this do?</h3>
+        <p>
+          It strips the 32-character Notion ID from each filename, rewrites links in
+          <span class="mono">.md</span> and <span class="mono">.html</span> files, and packages a
+          new ZIP named <span class="mono">clean_notion_export.zip</span>.
+        </p>
+        <h3>Does the ZIP leave this browser?</h3>
+        <p>No. The file is read locally and handed to a worker on this page. Nothing is uploaded.</p>
+        <h3>What about a ZIP inside a ZIP?</h3>
+        <p>
+          If the export contains exactly one nested ZIP, unwrap is automatic. There is no toggle.
+        </p>
+        <h3>What if two pages clean to the same name?</h3>
+        <p>The second file gets a <span class="mono">(2)</span> suffix so nothing is overwritten.</p>
+        <h3>Do I need an email to download?</h3>
+        <p>No. Email is optional and only appears after a successful clean.</p>
+        <h3>Who made this?</h3>
+        <p>
+          Hexakin, a Hillmade product. Not affiliated with Notion. Contact
+          <a href="mailto:jonathan.hill@hillmade.uk">jonathan.hill@hillmade.uk</a>.
+        </p>
+
+        <h2>Privacy</h2>
+        <p>
+          No accounts. No server-side waitlist. If you leave an email, it is stored in this browser
+          under <span class="mono">hexakin-notion-waitlist</span> and is never sent.
+        </p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>© Hexakin · Built in the open by <a href="https://hillmade.uk">Hillmade</a></p>
+      <p>Not affiliated with Notion · <a href="https://hexakin.com">hexakin.com</a></p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
