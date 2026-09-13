@@ -1,5 +1,8 @@
 import './styles.css';
+import { inject } from '@vercel/analytics';
 import { mountNewsletter } from './newsletter.js';
+
+inject();
 
 const MAX_ZIP_SIZE = 200 * 1024 * 1024;
 
